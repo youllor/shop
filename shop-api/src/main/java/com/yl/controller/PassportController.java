@@ -3,6 +3,7 @@ package com.yl.controller;
 import com.yl.bo.UserBO;
 import com.yl.pojo.Users;
 import com.yl.service.UserService;
+import com.yl.utils.CookieUtils;
 import com.yl.utils.JSONResult;
 import com.yl.utils.JsonUtils;
 import com.yl.utils.MD5Utils;
@@ -45,7 +46,9 @@ public class PassportController {
     }
     @ApiOperation(value = "用户注册",notes = "用户注册",httpMethod = "POST")
     @PostMapping("/regist")
-    public JSONResult regist(@RequestBody UserBO userBO){
+    public JSONResult regist(@RequestBody UserBO userBO,
+                             HttpServletRequest request,
+                             HttpServletResponse response){
         String username = userBO.getUsername();
         String password = userBO.getPassword();
         String confirmPwd = userBO.getConfirmPassword();
@@ -70,7 +73,9 @@ public class PassportController {
             return JSONResult.errorMsg("两次密码输入不一致");
         }
         //4.实现注册
-        userService.createUser(userBO);
+        Users userResult = userService.createUser(userBO);
+        setNullProperty(userResult);
+        CookieUtils.setCookie(request,response,"user",JsonUtils.objectToJson(userResult),true);
         return JSONResult.ok();
     }
     
@@ -96,6 +101,20 @@ public class PassportController {
         if (userResult == null) {
             return JSONResult.errorMsg("用户名或密码不正确");
         }
+        setNullProperty(userResult);
+        CookieUtils.setCookie(request,response,"user",JsonUtils.objectToJson(userResult),true);
         return JSONResult.ok(userResult);
     }
+
+    private Users setNullProperty(Users userResult) {
+        userResult.setPassword(null);
+        userResult.setMobile(null);
+        userResult.setEmail(null);
+        userResult.setCreatedTime(null);
+        userResult.setUpdatedTime(null);
+        userResult.setBirthday(null);
+        return userResult;
+    }
+
+
 }
