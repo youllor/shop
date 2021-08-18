@@ -3,22 +3,18 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>foodie-dev</artifactId>
+        <artifactId>shop-dev</artifactId>
         <groupId>com.yl</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>foodie-mapper</artifactId>
+    <artifactId>shop-pojo</artifactId>
 
     <dependencies>
-<!--
-        mapper -> poJ0-> common
-        mapper通过pojo是可以使用 common中相应的方法的
--->
         <dependency>
             <groupId>com.yl</groupId>
-            <artifactId>foodie-pojo</artifactId>
+            <artifactId>shop-common</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
     </dependencies>

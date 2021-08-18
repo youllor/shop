@@ -3,15 +3,25 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>foodie-dev</artifactId>
+        <artifactId>shop-dev</artifactId>
         <groupId>com.yl</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <!--默认打包方式为 jar-->
-<!--    <packaging>jar</packaging>-->
-    <artifactId>foodie-common</artifactId>
 
+    <artifactId>shop-mapper</artifactId>
+
+    <dependencies>
+<!--
+        mapper -> poJ0-> common
+        mapper通过pojo是可以使用 common中相应的方法的
+-->
+        <dependency>
+            <groupId>com.yl</groupId>
+            <artifactId>shop-pojo</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
